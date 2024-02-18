@@ -604,14 +604,14 @@ BASE = "http://127.0.0.1:5000"
 #     "cookies": bing_cookies
 # })
 #
-gemini_response = requests.post(BASE + "/ask/gemini_web", json={
-    "question": "Latest nextjs version?",
-    "cookies": gemini_cookies
-})
-
-# gemini_api_response = requests.post(BASE + "/ask/gemini_api", json={
-#     "question": "Latest nextjs version?"
+# gemini_response = requests.post(BASE + "/ask/gemini_web", json={
+#     "question": "Latest nextjs version?",
+#     "cookies": gemini_cookies
 # })
 
+gemini_api_response = requests.post(BASE + "/ask/gemini_api", json={
+    "question": "Latest nextjs version?"
+})
+
 models_response = requests.get(BASE+'/supported_models')
-print(gemini_response.json())
+print(gemini_api_response.json())

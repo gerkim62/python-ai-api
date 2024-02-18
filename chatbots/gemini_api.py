@@ -13,5 +13,5 @@ model = GenerativeModel('gemini-pro')
 
 def ask_gemini_api(question):
     chat = model.start_chat()
-    response = chat.send_message('Hello, what should I have for dinner?')
+    response = chat.send_message(question)
     return response.text
