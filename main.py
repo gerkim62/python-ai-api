@@ -1,17 +1,19 @@
 import asyncio
 
-from flask import Flask, abort
+from flask import Flask, abort, render_template
 from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 
 from constants import SUPPORTED_MODELS
 
 from chatbots.bing_web import ask_bing_web
 from chatbots.gemini_api import ask_gemini_api
 from chatbots.gemini_web import ask_gemini_web
-from chatbots.chatgpt_web import ask_chatgpt_web
-from chatbots.claude_web import ask_claude_web
+# from chatbots.chatgpt_web import ask_chatgpt_web
+# from chatbots.claude_web import ask_claude_web
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 
@@ -76,6 +78,12 @@ class SupportedModels(Resource):
 
 api.add_resource(Ask, "/ask/<string:model>")
 api.add_resource(SupportedModels, "/supported_models")
+
+# Route to serve the homepage
+@app.route("/", methods=["GET"])
+def homepage():
+    return render_template("index.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)
